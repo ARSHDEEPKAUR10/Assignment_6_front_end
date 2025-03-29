@@ -105,3 +105,25 @@ document.addEventListener("DOMContentLoaded", function () {
 		//... form submission logic including setting cookies and calculating score
 	}
 });
+
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        let date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+function getCookie(name) {
+    let nameEQ = name + "=";
+    let cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        let c = cookies[i].trim();
+        if (c.indexOf(nameEQ) == 0) {
+            return c.substring(nameEQ.length);
+        }
+    }
+    return null;
+}
