@@ -127,3 +127,12 @@ function getCookie(name) {
     }
     return null;
 }
+// Function to check username and update UI
+function checkUsername() {
+    const storedUsername = getCookie("username");
+    if (storedUsername) {
+        greeting.textContent = `Welcome back, ${storedUsername}!`;
+        usernameInput.style.display = "none";
+        startButton.style.display = "none";
+    }
+}
