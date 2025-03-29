@@ -163,4 +163,28 @@ document.getElementById("trivia-form").addEventListener("submit", function (even
     fetchTriviaQuestions();
 });
 
+function saveScore(user, score) {
+    let scores = JSON.parse(localStorage.getItem("triviaScores")) || {};
+    if (!scores[user]) {
+        scores[user] = [];
+    }
+    scores[user].push(score);
+    localStorage.setItem("triviaScores", JSON.stringify(scores));
+}
+
+function displayScores() {
+    let scores = JSON.parse(localStorage.getItem("triviaScores")) || {};
+    let scoreBoard = document.getElementById("score-board");
+    scoreBoard.innerHTML = "<h3>Score History</h3>";
+
+    Object.keys(scores).forEach(user => {
+        let userScores = scores[user].join(", ");
+        scoreBoard.innerHTML += `<p><strong>${user}:</strong> ${userScores}</p>`;
+    });
+}
+
+// Call this function when the game starts to show previous scores
+window.onload = displayScores;
+
+
 
