@@ -136,3 +136,20 @@ function checkUsername() {
         startButton.style.display = "none";
     }
 }
+
+document.getElementById("trivia-form").addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent default form submission behavior
+
+    // Retrieve user session
+    let user = sessionStorage.getItem("user") || "Guest";
+
+    // Placeholder for score calculation
+    let score = 0; 
+
+    // Placeholder for saving score (to be implemented later)
+    console.log(`User: ${user}, Score: ${score}`);
+
+    // Fetch new questions
+    fetchTriviaQuestions();
+});
+
