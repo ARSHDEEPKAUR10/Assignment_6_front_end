@@ -137,19 +137,30 @@ function checkUsername() {
     }
 }
 
+function calculateScore() {
+    let score = 0;
+    const formData = new FormData(document.getElementById("trivia-form"));
+
+    formData.forEach((value, key) => {
+        let correctAnswer = document.querySelector(`input[name="${key}"][data-correct="true"]`);
+        if (correctAnswer && correctAnswer.value === value) {
+            score += 1; 
+        }
+    });
+
+    return score;
+}
 document.getElementById("trivia-form").addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent default form submission behavior
+    event.preventDefault();
 
-    // Retrieve user session
     let user = sessionStorage.getItem("user") || "Guest";
+    let score = calculateScore(); 
 
-    // Placeholder for score calculation
-    let score = 0; 
-
-    // Placeholder for saving score (to be implemented later)
     console.log(`User: ${user}, Score: ${score}`);
+    saveScore(user, score);
 
     // Fetch new questions
     fetchTriviaQuestions();
 });
+
 
